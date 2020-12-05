@@ -19,6 +19,24 @@ processPointClouds.cpp
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.cpp
 processPointClouds.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.h
+iostream
+-
+pcl/ModelCoefficients.h
+-
+pcl/io/pcd_io.h
+-
+pcl/point_types.h
+-
+pcl/sample_consensus/method_types.h
+-
+pcl/sample_consensus/model_types.h
+-
+pcl/segmentation/sac_segmentation.h
+-
+pcl/filters/voxel_grid.h
+-
+pcl/filters/extract_indices.h
+-
 
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.h
 pcl/io/pcd_io.h
