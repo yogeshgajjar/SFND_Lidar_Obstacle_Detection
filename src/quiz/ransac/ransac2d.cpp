@@ -3,9 +3,12 @@
 
 #include "../../render/render.h"
 #include <unordered_set>
+#include <vector>
 #include "../../processPointClouds.h"
 // using templates for processPointClouds so also include .cpp to help linker
 #include "../../processPointClouds.cpp"
+
+using namespace std;
 
 pcl::PointCloud<pcl::PointXYZ>::Ptr CreateData()
 {
@@ -69,13 +72,36 @@ std::unordered_set<int> Ransac(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int ma
 	// TODO: Fill in this function
 
 	// For max iterations 
-
 	// Randomly sample subset and fit line
 
 	// Measure distance between every point and fitted line
 	// If distance is smaller than threshold count it as inlier
 
 	// Return indicies of inliers from fitted line with most inliers
+
+	
+	std::vector<int> inliers;
+
+	if(inliers.size() < 3) 
+		inliers.push_back(rand() % cloud->points.size());
+
+	float x1{}, x2{}, y1{}, y2{}, a{}, b{}, c{};
+
+	auto itr = inliers.begin();
+	x1 = cloud->points[*itr].x;
+	y1 = cloud->points[*itr].y;
+	itr++;
+	x2 = cloud->points[*itr].x;
+	y2 = cloud->points[*itr].y;
+
+	a = (y2-y1);
+	b = (x2-x1);
+	c = (x1*y2 - x2*y1);
+
+	for(int i=0; i < cloud->points.size(); i++) {
+		float distance{};
+		
+	}
 	
 	return inliersResult;
 
