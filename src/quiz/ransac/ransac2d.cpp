@@ -80,27 +80,61 @@ std::unordered_set<int> Ransac(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, int ma
 	// Return indicies of inliers from fitted line with most inliers
 
 	
-	std::vector<int> inliers;
+	// std::vector<int> inliers;
 
-	if(inliers.size() < 3) 
-		inliers.push_back(rand() % cloud->points.size());
+	// if(inliers.size() < 3) 
+	// 	inliers.push_back(rand() % cloud->points.size());
 
-	float x1{}, x2{}, y1{}, y2{}, a{}, b{}, c{};
+	// float x1{}, x2{}, y1{}, y2{}, a{}, b{}, c{};
 
-	auto itr = inliers.begin();
-	x1 = cloud->points[*itr].x;
-	y1 = cloud->points[*itr].y;
-	itr++;
-	x2 = cloud->points[*itr].x;
-	y2 = cloud->points[*itr].y;
 
-	a = (y2-y1);
-	b = (x2-x1);
-	c = (x1*y2 - x2*y1);
+	// auto itr = inliers.begin();
+	// x1 = cloud->points[*itr].x;
+	// y1 = cloud->points[*itr].y;
+	// itr++;
+	// x2 = cloud->points[*itr].x;
+	// y2 = cloud->points[*itr].y;
 
-	for(int i=0; i < cloud->points.size(); i++) {
-		float distance{};
-		
+	// a = (y2-y1);
+	// b = (x2-x1);
+	// c = (x1*y2 - x2*y1);
+
+	// for(int i=0; i < cloud->points.size(); i++) {
+	// 	float distance{};
+	// }
+
+	
+
+	while(maxIterations-- >= 0) {
+		unordered_set<int> inliers_set;
+
+		while(inliers_set.size() < 2) 
+			inliers_set.push_back(rand() % cloud->points.size());
+
+		float x1{}, x2{}, y1{}, y2{}, a{}, b{}, c{};
+
+		auto itr = inliers_set.begin();
+		x1 = cloud->points[*itr].x;
+		y1 = cloud->points[*itr].y;
+		itr++;
+		x2 = cloud->points[*itr].x;
+		y2 = cloud->points[*itr].y;
+
+		a = (y2-y1);
+		b = (x2-x1);
+		c = (x1*y2 - x2*y1);
+
+		for(int i=0; i < cloud->points.size(); i++) {
+			if(inliers_set.count(i))
+				continue;
+
+			float x0{}, y0{};
+			x0 = cloud->points[i].x;
+			y0 = cloud->points[i].y;
+
+			temp = abs(((a*x0)+(b*y0)+c)) / sqrt((a*a) + (b*b));
+		}
+
 	}
 	
 	return inliersResult;
