@@ -5,6 +5,8 @@
 
 
 // Structure to represent node of kd tree
+using namespace std; 
+
 struct Node
 {
 	std::vector<float> point;
@@ -25,11 +27,31 @@ struct KdTree
 	: root(NULL)
 	{}
 
+	void insertBST(Node **node, int depth, vector<float> point, int id) {
+		// cout << "Entered helper function" << endl;
+
+		if(*node == NULL) {
+			// cout << "in null" << endl;
+			*node = new Node(point, id);
+		}
+
+		else {
+			int kd_depth = depth % 2;
+			// cout << kd_depth << endl;
+
+			if(point[kd_depth] < (*node)->point[kd_depth])
+				insertBST(&((*node)->left), depth+1, point, id);
+			else 
+				insertBST(&((*node)->right), depth+1, point, id);
+		}
+	}
+
 	void insert(std::vector<float> point, int id)
 	{
 		// TODO: Fill in this function to insert a new point into the tree
 		// the function should create a new node and place correctly with in the root 
 
+		insertBST(&root, 0, point, id);
 	}
 
 	// return a list of point ids in the tree that are within distance of target
