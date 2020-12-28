@@ -166,7 +166,7 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
         for(auto i:clust_indices.indices)
             cloud_cluster->points.push_back(cloud->points[i]);
 
-        cloud_cluster->width = cloud_cluster->size ();
+        cloud_cluster->width = cloud_cluster->points.size();
         cloud_cluster->height = 1;
         cloud_cluster->is_dense = true;
 
