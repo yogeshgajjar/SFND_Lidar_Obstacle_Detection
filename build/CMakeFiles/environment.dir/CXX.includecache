@@ -21,6 +21,8 @@ processPointClouds.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.h
 iostream
 -
+unordered_set
+-
 pcl/ModelCoefficients.h
 -
 pcl/io/pcd_io.h

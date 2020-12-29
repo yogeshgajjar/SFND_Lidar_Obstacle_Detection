@@ -78,14 +78,18 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer)
 
 void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointClouds<pcl::PointXYZI> *pointProcessorI, const pcl::PointCloud<pcl::PointXYZI>::Ptr &inputCloud) {
     
-    pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorI->FilterCloud(inputCloud, 0.2f, Eigen::Vector4f (-10.0, -5, -5.0, 1), Eigen::Vector4f (30.0, 5.0, -0.50, 1));
+    // pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorI->FilterCloud(inputCloud, 0.2f, Eigen::Vector4f (-10.0, -5, -5.0, 1), Eigen::Vector4f (30.0, 5.0, -0.50, 1));
+    pcl::PointCloud<pcl::PointXYZI>::Ptr filterCloud = pointProcessorI->FilterCloud(inputCloud, 0.3, Eigen::Vector4f (-20, -6, -3, 1), Eigen::Vector4f (30, 7, 2, 1));
+
     renderPointCloud(viewer,filterCloud,"filterCloud");
 
-    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> pair_cloud = pointProcessorI->SegmentPlane(filterCloud, 100, 0.2);
+    // std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> pair_cloud = pointProcessorI->SegmentPlane(filterCloud, 100, 0.2);
+    std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> pair_cloud = pointProcessorI->myRansacPlane(filterCloud, 100, 0.2);
+
     renderPointCloud(viewer, pair_cloud.first, "obstacle_cloud", Color(1,0,0));
     renderPointCloud(viewer, pair_cloud.second, "obstacle_road", Color(0,1,0));
 
-    // std::vector<pcl::PointXYZI> clusters;
+    std::vector<pcl::PointXYZI> clusters;
     std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(pair_cloud.first, 0.5, 50, 500);
     
     int clusterID{};
