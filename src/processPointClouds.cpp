@@ -11,6 +11,8 @@
 #include <pcl/segmentation/sac_segmentation.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/filters/extract_indices.h>
+// #include "quiz/cluster/kdtree.h"
+
 
 
 //constructor:
@@ -286,6 +288,61 @@ std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT
 	}
 
     return std::pair<typename pcl::PointCloud<PointT>::Ptr, typename pcl::PointCloud<PointT>::Ptr>(cloud_obstacle, cloud_road);
+}
+
+template<typename PointT>
+void ProcessPointClouds<PointT>::myclusterTemp(int id, std::vector<int> &cluster, typename pcl::PointCloud<PointT>::Ptr cloud, float distanceTol, KdTree* tree, std::vector<bool> points_processed) {
+
+	points_processed[id] = true;
+	cluster.push_back(id);
+
+	std::vector<int> clust_id = tree->search(cloud->points[id], distanceTol);
+
+	for(auto &i:clust_id) {
+		if(!points_processed[i]) {
+			myclusterTemp(i, cluster, cloud, distanceTol, tree, points_processed);
+		}
+	}
+}
+
+template<typename PointT>
+std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::myeuclideanCluster(typename pcl::PointCloud<PointT>::Ptr cloud, KdTree* tree, float clusterTolerance, int minSize, int maxSize)
+{
+
+	// TODO: Fill out this function to return list of indices for each cluster
+
+	std::vector<typename pcl::PointCloud<PointT>::Ptr> clusters;
+	std::vector<bool> points_processed(cloud->points.size(), false);
+
+	for(size_t i=0; i < cloud->points.size(); i++) {
+		if(!points_processed[i]) {
+			// continue;            
+            std::vector<int> cluster_vec;
+            typename pcl::PointCloud<PointT>::Ptr cluster(new pcl::PointCloud<PointT> ());
+            myclusterTemp(i, cluster_vec, cloud, clusterTolerance, tree, points_processed);
+
+            if(cluster_vec.size() >= minSize && cluster_vec.size() <= maxSize) {
+                for(int j=0; j < cluster_vec.size(); j++) {
+                    cluster->points.push_back(cloud->points[cluster_vec[j]]);
+                }
+
+                cluster->width = cluster->points.size();
+                cluster->height = 1;
+                // cluster->is_dense = true;
+
+                clusters.push_back(cluster);
+
+            }
+            else {
+                for(int j=1; j < cluster_vec.size(); j++) {
+                    points_processed[cluster_vec[j]] = false;
+                }
+            }
+        }		
+	}
+ 
+	return clusters;
+
 }
 
 template<typename PointT>
