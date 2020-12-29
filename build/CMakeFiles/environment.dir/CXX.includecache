@@ -16,6 +16,10 @@ processPointClouds.h
 processPointClouds.cpp
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.cpp
 
+/home/workspace/SFND_Lidar_Obstacle_Detection/src/kdtree.h
+render/render.h
+/home/workspace/SFND_Lidar_Obstacle_Detection/src/render/render.h
+
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.cpp
 processPointClouds.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/processPointClouds.h
@@ -73,6 +77,8 @@ render/box.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/render/box.h
 render/render.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/render/render.h
+kdtree.h
+/home/workspace/SFND_Lidar_Obstacle_Detection/src/kdtree.h
 
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/render/box.h
 Eigen/Geometry
