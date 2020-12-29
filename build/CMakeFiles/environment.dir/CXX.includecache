@@ -71,6 +71,8 @@ chrono
 -
 render/box.h
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/render/box.h
+render/render.h
+/home/workspace/SFND_Lidar_Obstacle_Detection/src/render/render.h
 
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/render/box.h
 Eigen/Geometry
