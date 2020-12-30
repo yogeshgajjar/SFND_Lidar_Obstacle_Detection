@@ -86,14 +86,14 @@ void cityBlock(pcl::visualization::PCLVisualizer::Ptr& viewer, ProcessPointCloud
     // std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> pair_cloud = pointProcessorI->SegmentPlane(filterCloud, 100, 0.2);
     std::pair<pcl::PointCloud<pcl::PointXYZI>::Ptr, pcl::PointCloud<pcl::PointXYZI>::Ptr> pair_cloud = pointProcessorI->myRansacPlane(filterCloud, 100, 0.2);
     
-    KdTree* tree = new KdTree;
+    // KdTree* tree = new KdTree;
   
-    for (int i=0; i<pair_cloud.first->points.size(); i++) 
-    	tree->insert(pair_cloud.first->points[i],i);
+    // for (int i=0; i<pair_cloud.first->points.size(); i++) 
+    // 	tree->insert(pair_cloud.first->points[i],i);
 
     // std::vector<pcl::PointXYZI> clusters;
     // std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->Clustering(pair_cloud.first, 0.5, 50, 500);
-    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->myeuclideanCluster(pair_cloud.first, tree, 0.5, 50, 500);
+    std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr> cloudClusters = pointProcessorI->myeuclideanCluster(pair_cloud.first, 0.5, 50, 500);
 
     renderPointCloud(viewer, pair_cloud.first, "obstacle_cloud", Color(1,0,0));
     renderPointCloud(viewer, pair_cloud.second, "obstacle_road", Color(0,1,0));

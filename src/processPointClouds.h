@@ -20,6 +20,7 @@
 #include "render/box.h"
 #include "render/render.h"
 #include "kdtree.h"
+#include "cluster.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ public:
 
     void myclusterTemp(int id, std::vector<int> &cluster, typename pcl::PointCloud<PointT>::Ptr cloud, float distanceTol, KdTree* tree, std::vector<bool> points_processed);
 
-    std::vector<typename pcl::PointCloud<PointT>::Ptr> myeuclideanCluster(typename pcl::PointCloud<PointT>::Ptr cloud, KdTree* tree, float clusterTolerance, int minSize, int maxSize);
+    std::vector<typename pcl::PointCloud<PointT>::Ptr> myeuclideanCluster(typename pcl::PointCloud<PointT>::Ptr cloud, float clusterTolerance, int minSize, int maxSize);
 
     Box BoundingBox(typename pcl::PointCloud<PointT>::Ptr cluster);
 

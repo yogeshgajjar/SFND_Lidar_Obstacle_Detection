@@ -95,18 +95,17 @@ std::vector<std::vector<int>> euclideanCluster(const std::vector<std::vector<flo
 	// TODO: Fill out this function to return list of indices for each cluster
 
 	std::vector<std::vector<int>> clusters;
-	// std::vector<bool> points_processed(points.size(), false);
+	std::vector<bool> points_processed(points.size(), false);
 
-	// for(int i=0; i < points.size(); i++) {
-	// 	if(points_processed[i])
-	// 		continue;
+	for(int i=0; i < points.size(); i++) {
+		if(points_processed[i])
+			continue;
 
 		
-	// 	std::vector<int> cluster;
-	// 	clusterTemp(i, cluster, points, distanceTol, tree, points_processed);
-	// 	clusters.push_back(cluster);
-		
-	// }
+		std::vector<int> cluster;
+		clusterTemp(i, cluster, points, distanceTol, tree, points_processed);
+		clusters.push_back(cluster);
+	}
  
 	return clusters;
 
