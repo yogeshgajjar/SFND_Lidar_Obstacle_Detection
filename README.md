@@ -12,15 +12,24 @@
 This project detects road obstacles present in the point cloud data stream (LiDAR data) and builds a 3D bounding box around it. The entire LiDAR obstacle detection pipeline is divided into the three steps. 
 
 The three steps are, \
+
 **1. Segmentation** \
     Segmentation is used to segment the point cloud data into two different parts mainly the road and the obstacles. We see the road is a plane(inliers) and obstacles(outliers) are objects on the plane. I used RANSAC to identify the inliers and outliers point clouds. RANSAC allows to fit a plane where most of the points lie, using this principle, the points lying on the road plane is segmented from the obstacle. 
     The output from the segmentation is below. 
 
 ![segmentation](media/seg.png)
 
-**2. Clustering**\
+**2. Clustering** \
+Clustering involves grouping the outliers point cloud i.e. point cloud corresponding to the obstacles. I used Euclidean Clustering (KDTree) method to group the points together if they fall into a group with a threshold distance. 
 
+The image below shows the clusters in cycled colors of red, yellow, and blue. In that image we see that the oncoming truck is actually broken up into two colors, front and back. This illustrates the challenges with clustering based on proximity, the gap between the front of the truck and the back of the truck is large enough so that they look separate. 
 
+![image](media/cluster.png)
+
+**3. Bounding Box for the Cluster** \
+This step involves placing a bounding box around the individual clusters formed by the clustering algorithm. 
+
+![image](media/box.png)
 
 ## Installation
 
