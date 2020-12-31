@@ -1,6 +1,4 @@
-# Sensor Fusion Self-Driving Car Course
-
-<!-- <img src="https://github.com/udacity/SFND_Lidar_Obstacle_Detection/blob/master/media/ObstacleDetectionFPS.gif" width="700" height="400" /> -->
+# LiDAR 3D Obstacle Detection on a Point Cloud Data
 
 ![image](media/ObstacleDetectionFPS.gif)
 
