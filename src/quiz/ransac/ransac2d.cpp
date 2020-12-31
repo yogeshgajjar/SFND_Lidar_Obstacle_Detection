@@ -157,33 +157,10 @@ std::unordered_set<int> RansacPlane(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, i
 		y3 = cloud->points[*itr].y;
 		z3 = cloud->points[*itr].z;
 
-		vector<float> v1, v2, v3;
-		// v1.push_back(x2-x1);
-		// v1.push_back(y2-y1);
-		// v1.push_back(z2-z1);
-		// v2.push_back(x3-x1);
-		// v2.push_back(y3-y1);
-		// v2.push_back(x3-x1);
-		
-		
-		// v3.push_back(((y2-y1)*(z3-z1)) - ((z2-z1)*(y3-y1)));
-		// v3.push_back(((z2-z1)*(x3-x1)) - ((x2-x1)*(z3-z1)));
-		// v3.push_back(((x2-x1)*(y3-y1)) - ((y2-y1)*(x3-x1)));
-
 		a = ((y2-y1)*(z3-z1)) - ((z2-z1)*(y3-y1));
 		b = ((z2-z1)*(x3-x1)) - ((x2-x1)*(z3-z1));
 		c = ((x2-x1)*(y3-y1)) - ((y2-y1)*(x3-x1));
 		d = -(a*x1 + b*y1 + c*z1);
-
-		// a = v3[0];
-		// b = v3[1];
-		// c = v3[2];
-		// d = -(a*x1 + b*y1 + c*z1);
-
-
-		// a = (y1-y2);
-		// b = (x2-x1);
-		// c = (x1*y2 - x2*y1);
 
 		for(int i=0; i < cloud->points.size(); i++) {
 			if(inliers_set.count(i))

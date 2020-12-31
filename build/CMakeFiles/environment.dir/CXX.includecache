@@ -9,6 +9,8 @@
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/cluster.h
 iostream
 -
+vector
+-
 
 /home/workspace/SFND_Lidar_Obstacle_Detection/src/environment.cpp
 sensors/lidar.h

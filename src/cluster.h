@@ -1,7 +1,9 @@
+
 #ifndef CLUSTER_H
 #define CLUSTER_H
 
 #include <iostream>
+#include <vector>
 // #include "kdtree.h"
 
 
